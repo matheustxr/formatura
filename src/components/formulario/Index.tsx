@@ -5,25 +5,22 @@ import SendIcon from "@mui/icons-material/Send";
 
 interface FormData {
   nome: string;
-  telefone: string;
-  email: string;
-  mensagem: string;
-  propostaFile: File | null;
-  propostaName: string;
+  presenca: string
 }
 
+const options = [
+  {option: "Escolha uma das opções"},
+  {option: "Irei comparecer"},
+  {option: "Infelizmente não poderei comparecer"},
+]
 
 export const Formulario = () => {
   const [formData, setFormData] = useState<FormData>({
     nome: "",
-    telefone: "",
-    email: "",
-    mensagem: "",
-    propostaFile: null,
-    propostaName: ""
+    presenca: "",
   });
 
-  const propostaFileRef = useRef<HTMLInputElement | null>(null);
+  const [isSending, setIsSending] = useState(false);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>) => {
     const { id, value } = e.target;
@@ -33,34 +30,30 @@ export const Formulario = () => {
     }));
   };
 
-  const handleFileUpload = () => {
-    const file = propostaFileRef.current?.files?.[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = () => {
-        console.log("Arquivo:", reader.result);
-        setFormData((prevData) => ({
-          ...prevData,
-          propostaFile: file,
-          propostaName: file.name
-        }));
-      };
-      reader.readAsDataURL(file);
-    }
+  const handleSelectChange = (e: ChangeEvent<HTMLSelectElement>) => {
+    const { id, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [id]: value,
+    }));
   };
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
+    
     try {
+      setIsSending(true)
       await enviarEmail(formData);
+      console.log(formData)
     } catch (error) {
       console.error("Something is wrong", error);
+    } finally{
+      setIsSending(false)
     }
   };
 
   return (
-    <form onSubmit={handleSubmit} method="post" className="flex flex-col ">
+    <form onSubmit={handleSubmit} method="post" className="w-[85%] flex flex-col ">
       <label htmlFor="nome">Nome:</label>
       <input
         type="text"
@@ -71,54 +64,35 @@ export const Formulario = () => {
         className="mb-5 h-[50px]  md:max-w-none md:w-[600px] rounded text-black "
       />
 
-      <label htmlFor="email">Email:</label>
-      <input
-        type="text"
-        id="email"
-        name="email"
+      <label className="font-bold" htmlFor="presenca">Confirme sua presença:</label>
+      <select 
+        name="presenca"
         required
-        onChange={handleChange}
-        className="mb-5 h-[50px]  md:max-w-none md:w-[600px] rounded text-black "
-      />
-
-      <label htmlFor="telefone">Telefone:</label>
-      <input
-        type="text"
-        id="telefone"
-        name="telefone"
-        required
-        onChange={handleChange}
-        className="mb-5 h-[50px]  md:max-w-none md:w-[600px] rounded text-black "
-      />
-
-      <label htmlFor="mensagem">Mensagem:</label>
-      <textarea
-        id="mensagem"
-        name="mensagem"
-        rows={8}
-        cols={30}
-        required
-        onChange={handleChange}
-        className="mb-5 h-[120px]  md:max-w-none  md:w-[600px] rounded text-black "
-      />
-
-      <label htmlFor="proposta">Proposta:</label>
-      <input
-        id="proposta"
-        type="file"
-        name="proposta"
-        ref={propostaFileRef}
-        onChange={handleFileUpload}
-        className="mb-5  md:max-w-none"
-      />
+        value={formData.presenca}
+        onChange={handleSelectChange}
+        id="presenca"
+        className="mb-5 w-[100%]  h-[50px]  md:w-[600px] xl:w-[600px] bg-gray-200  rounded text-black px-2"
+      >
+        {
+          options.map( (option) => <option key={option.option}>{option.option}</option>)
+        }
+        
+      </select>
 
       <Button
         type="submit"
         variant="contained"
-        className="  md:max-w-none bg-[#ec5f1a] shadow-[0px_0px_20px_#ec5f1a] hover:bg-[#eab308] hover:shadow-[0px_0px_20px_#eab308] transition-all duration-200 mt-5"
+        className={
+          isSending
+          ? "bg-slate-400"
+          : "text-black hover:text-white md:max-w-none bg-[#1deaf8]  hover:bg-[#1e4444]  transition-all duration-200 mt-5"
+        }
         endIcon={<SendIcon />}
+        disabled={isSending}
       >
-        Enviar
+        {
+          isSending ? "Enviando" : "Enviar"
+        }
       </Button>
     </form>
   );

@@ -9,7 +9,6 @@ export default defineConfig({
       '@': '/src',
     },
   },
-  base: '/farinha-de-peixe/'
 
   /* sasa */
 })

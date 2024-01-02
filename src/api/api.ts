@@ -1,30 +1,20 @@
 import axios from "axios";
 
 export const api = axios.create({
-  baseURL: "https://backend-farinhas-patense.onrender.com",
+  baseURL: "",
 });
 
 interface propsFormData {
   nome: string;
-  telefone: string;
-  email: string;
-  mensagem: string;
-  propostaFile: File | null;
-  propostaName: string;
+  presenca: string;
 }
 
 export const enviarEmail = async (formData: propsFormData) => {
-  const { nome, telefone, email, mensagem, propostaFile, propostaName } = formData;
+  const { nome, presenca  } = formData;
 
   const formDataToSend = new FormData();
   formDataToSend.append("nome", nome);
-  formDataToSend.append("telefone", telefone);
-  formDataToSend.append("email", email);
-  formDataToSend.append("mensagem", mensagem);
-
-  if (propostaFile) {
-    formDataToSend.append("propostaFile", propostaFile, propostaName);
-  }
+  formDataToSend.append("presenca", presenca);
 
   try {
     const response = await api.post("/send", formDataToSend, {
