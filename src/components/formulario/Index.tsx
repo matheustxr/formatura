@@ -61,7 +61,7 @@ export const Formulario = () => {
         name="nome"
         required
         onChange={handleChange}
-        className="mb-5 h-[50px]  md:max-w-none md:w-[600px] rounded text-black "
+        className="mb-5 p-2 h-[50px]  md:max-w-none md:w-[600px] rounded text-black "
       />
 
       <label className="font-bold" htmlFor="presenca">Confirme sua presença:</label>

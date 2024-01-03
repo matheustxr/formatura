@@ -3,7 +3,7 @@ import { Formulario } from "../formulario/Index";
 
 export default function Section2() {
   return (
-    <section className="pb-10 w-full min-h-[50vh] lg:min-h-screen bg-[#0d1321] flex flex-col  items-center max-w-screen text-white">
+    <section className="pb-10 w-full lg:min-h-screen bg-[#0d1321] flex flex-col  items-center max-w-screen text-white">
       
 
       {/* FORM */}
