@@ -14,7 +14,7 @@ export const enviarEmail = async (formData: propsFormData) => {
 
   const formDataToSend = new FormData();
   formDataToSend.append("nome", nome);
-  formDataToSend.append("presenca", presenca);
+  formDataToSend.append("presença", presenca);
 
   try {
     const response = await api.post("/send", formDataToSend, {
