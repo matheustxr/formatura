@@ -20,7 +20,7 @@ export default function Section1() {
             <h1 className="mb-5 text-[60px] md:text-[115px] leading-[75px] md:leading-[100px] font-bold text-white text-center lg:text-start">
               Formatura Eduarda
             </h1>
-            <span className='w-full text-[20px] font-normal text-center  text-white border-[2px] rounded-xl'>A nutricionista do ano!!</span>
+            {/*<span className='w-full text-[20px] font-normal text-center  text-white border-[2px] rounded-xl'>A nutricionista do ano!!</span>*/}
           </div>
           <h2 className="mt-4 font-semibold text-white text-center md:text-start mb-10 md:text-[20px]">
             Espero que estejam tão empolgados quanto eu para a minha festa de formatura! Para garantir que tudo seja perfeito, peço a gentileza de confirmarem a presença até 20/01.
