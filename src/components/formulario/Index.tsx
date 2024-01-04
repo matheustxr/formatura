@@ -85,8 +85,9 @@ export const Formulario = () => {
         className={
           isSending
           ? "bg-slate-400"
-          : "text-black hover:text-white md:max-w-none bg-[#1deaf8]  hover:bg-[#1e4444]  transition-all duration-200 mt-5"
+          : "text-black hover:text-white bg-[#1deaf8]  hover:bg-[#1e4444]  transition-all duration-200 mt-5"
         }
+        style={{maxWidth:600}}
         endIcon={<SendIcon />}
         disabled={isSending}
       >

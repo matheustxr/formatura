@@ -12,14 +12,13 @@ interface propsFormData {
 export const enviarEmail = async (formData: propsFormData) => {
   const { nome, presenca  } = formData;
 
-  const formDataToSend = new FormData();
-  formDataToSend.append("nome", nome);
-  formDataToSend.append("presenca", presenca);
+  const dataToSend = {
+    nome,
+    presenca
+  }
 
-  try {
-    const response = await api.post("/send", formDataToSend, {
-      headers: { "Content-Type": "multipart/form-data" },
-    });
+  try{
+    const response = await api.post("/send", dataToSend)
 
     if (response.status === 200) {
       window.alert("Email enviado com sucesso!");
@@ -27,10 +26,10 @@ export const enviarEmail = async (formData: propsFormData) => {
       window.alert("Falha ao enviar o email. Por favor, tente novamente.");
     }
 
-    return response;
+    return response.data
   } catch (error) {
     console.error("Erro ao enviar o email:", error);
     window.alert("Falha ao enviar o email. Por favor, tente novamente.");
     throw error;
   }
-};
+}
