@@ -6,10 +6,6 @@ import 'aos/dist/aos.css';
 import Footer from "./components/footer/Index"
 import mozao from "./assets/images/mozao.webp"
 
-import AOS from 'aos';
-import 'aos/dist/aos.css';
-
-
 function App() {
   AOS.init();
 
@@ -30,7 +26,7 @@ function App() {
               data-aos="fade-down"
               data-aos-duration="1500"
             >
-              <h1 className="my-5 text-[60px] leading-[60px] md:text-[115px] md:leading-[100px] lg:text-[80px] lg:leading-[70px] xl:text-[115px] xl:leading-[100px] font-bold text-white text-center lg:text-start">
+              <h1 className="my-5 text-[60px] leading-[60px] md:text-[115px] md:leading-[100px] xl:text-[115px] lg:leading-[100px] font-bold text-white text-center lg:text-start">
                 Formatura <br /> Eduarda
               </h1>
             
